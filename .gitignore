@@ -1,0 +1,5 @@
+.idea/
+/vendor/
+composer.lock
+/tests/test.php
+tests/sources/youtube.jpg
