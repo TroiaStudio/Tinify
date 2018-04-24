@@ -1,3 +1,6 @@
+# Api key
+API key získáte na [tinyPNG - developer API](https://tinypng.com/developers)
+
 # Usage
 
 ```php
