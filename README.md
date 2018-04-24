@@ -1,4 +1,5 @@
 # Tinify PHP Client
+[![Build Status](https://travis-ci.org/TroiaStudio/Tinify.svg?branch=master)](https://travis-ci.org/TroiaStudio/Tinify)
 [![Total Downloads](https://poser.pugx.org/troiastudio/tinify/downloads)](https://packagist.org/packages/troiastudio/tinify)
 [![Latest Stable Version](https://poser.pugx.org/troiastudio/tinify/v/stable)](https://packagist.org/packages/troiastudio/tinify)
 [![License](https://poser.pugx.org/troiastudio/tinify/license)](https://packagist.org/troiastudio/tinify)

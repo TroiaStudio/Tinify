@@ -1,25 +1,26 @@
 language: php
 
 php:
-  - 5.6
   - 7.0
   - 7.1
+  - 7.2
 
 env:
   global:
     # TINIFY_TOKEN=
-    - secure Z6fH2sxCrNNjCnkQ0+4PLfMjFdGmVK7YsvpWsBkppOXQsCeVGMdMuJ/IcIzalFFf+SmRZbiiL7NUcjY8IIdGXCSJhrJY8zzF0oqmSzfWdgbuCQ7sCKlr9S2s5hn18w2tKAALJeSVefTN5PpXoCtTHDx25DQJyMtzsw8sPAHCYRv7l+zhUBDLsFb0DBZUcdEwqmKBJ2EqnVbWEuHQQeFU8K596VZrq5ddYBTN9UBbtCqpCNs1oWoVnDX+5iqzYUIPbTktSwcFKmZCM9qFjJ+dU94lZp33NcSTzb6HRIV7ZnnJo5P2SAFdKGll3KGQXvBBxI9ImauzES89/iawzrWeU7ud+7AsSrBK/vn6s0bmHYANsOCknuJbzJpaqmEQ91Qzg1dEbTkpudMObpXwAiRpzOpZUmIFkqs7mgtDpKDSmKNlt8mlOmLc0c1mTuxHckztCWbR0lHDB1AY+biBFYQn2rWtec+CWMLiuX2BEkY2go1A4dwom+c9WSJLlir6L+pS9YZezYvIqegB8P1BBqRaBloN4U3M1keslQh2zf3fQ2hwvG0bMp22jm0AsLz56qSqF0F8vJ4lq1q82VUv+ha8EuczaFUC01MI8+Rqs71IR3vuYeOaEx6zMBGqdpkl7/ydEkUCy7vtgSLBBS62s9k3fu/4MiARJK525Lfiw0gqSv4=
+    - secure: "iv09YFOZJ0xHjhITBVOwRTT4XIsQN+A0MkyIi4TIOEw6b3EuTAFGl2LHp40VyNhcSYcz/77OrrgeLLv3EggfWJ75Qvnk9HzbzS2Vt9/x2umLv4o8kCsaYUNIyEsacgd3dymkvZ4p8M06RU42wJ5AsNXb5yFEtKY5XqInAQ6mGKZYbn3RIOxhiOihH/beRsP1ihXnI8SaLxgEsG49bN4l4KOky4x7pjf80ZyVFiNvYsf6+35G7a3PWVWA72zjCFnaUiPuckHETIE2rPPWhEtXuSpt4wrl7OqGxT4ITa7fvdJU+g0OP32uY99Fk5IFfp6y/2JdEYeALzZsqFWQLGjHvcSh+smY8wu08uspt3bGcQhFfClobaGdLquDOL4NL2+HOhCFqC1SpqKLmNHxJ+Om4mO6jEBQdIFyOCyW0KQOaWF/Z70FaHcvcdtZcE5FPkHL8a9qgsLjd6LOZnzL4rft0SsVBNrJkJNVG5kwNnLdchB9HyYT11dbbgZ+mr81RUY92mnLdF8hkOyyQ6v8BRDiBsrrKns7nRXnsgR7IpUHIecTmuxAy+Q2Zqh8NLDJMNTcLzr077JZ4nvprd7TJ36m8hSelHb58t8vVjMG7zcsiFLQQEF0atCiste2dFdINYgUxmVqzft8IgNHtFxuD4p0g09inambNCTDitC7mnka78o="
+
 
 before_install:
-  - echo "extension=php_curl.so" >> tests/php.ini
-  - echo "TINIFY_TOKEN==${TINIFY_TOKEN=}" >> tests/php.ini
+#  - echo "extension=php_curl.so" >> tests/php.ini
+  - echo "TINIFY_TOKEN=${TINIFY_TOKEN}" >> tests/php.ini
 
 matrix:
   allow_failures:
-    - php: 7.1
+    - php: 7.0
 
 script:
-  - vendor/bin/tester -p php-cgi tests
+  - vendor/bin/tester -p php-cgi -c tests/php.ini tests
 
 after_failure:
   - for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done

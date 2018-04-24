@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace TroiaStudio\Tinify\Model;
 
+use GuzzleHttp\Exception\ClientException;
 use TroiaStudio\Tinify\Client\Client;
+use TroiaStudio\Tinify\Model\Exceptions\FileException;
 use TroiaStudio\Tinify\Validators\Resize\SizeValidator;
 
 
@@ -101,10 +103,22 @@ class Source
 	}
 
 
+	/**
+	 * @return $this
+	 * @throws FileException
+	 */
 	public function upload()
 	{
-		$response = $this->client->request('/shrink', file_get_contents($this->sourceFile));
-		$this->url = $response->getHeader('Location')[0];
+		try {
+			$response = $this->client->request('/shrink', file_get_contents($this->sourceFile));
+			$this->url = $response->getHeader('Location')[0];
+
+		} catch (ClientException $e) {
+			bdump($e);
+			$error = json_decode((string) $e->getResponse()->getBody());
+			throw new FileException(sprintf('%s : %s', $error->error, $error->message));
+		}
+
 		return $this;
 	}
 
